@@ -26,6 +26,9 @@ function Page() {
       <div className="my-5 h-1/6 w-full font-bold ">
         Good Morning Mr Naval Ravikant !
       </div>
+      <div className="h-4/6 w-full">
+
+      </div>
     </div>
   );
 }

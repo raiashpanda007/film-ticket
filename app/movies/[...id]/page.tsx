@@ -59,7 +59,8 @@ import withAuth from "@/hoc/withAuth";
       <img
         src={movie.img}
         alt={movie.name}
-        className="w-full h-96  rounded-lg shadow-2xl"
+        className="w-full h-96  rounded-lg shadow-2xl" 
+        loading="lazy"
       />
 
       <Card className="w-full">

@@ -9,7 +9,7 @@ function MoviesCard({ img, name, id }: { img: string, name: string, id: number }
             className="rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform transform hover:scale-105"
             onClick={() => router.push(`/movies/${id}`)}
         >
-            <img src={img} alt={name} className="w-full h-48 " />
+            <img src={img} alt={name} className="w-full h-48 " loading='lazy'/>
             <div className="p-3 bg-white text-center">
                 <h1 className="text-lg font-semibold">{name}</h1>
             </div>

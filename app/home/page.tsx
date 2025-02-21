@@ -3,7 +3,7 @@ import MoviesList from "@/components/MoviesList";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
-import { FiSearch, FiUser } from "react-icons/fi";
+import { FiSearch } from "react-icons/fi";
 import withAuth from "@/hoc/withAuth";
 function Page() {
   return (

@@ -1,9 +1,8 @@
 "use client";
-import React, { use } from "react";
-import { FiGlobe, FiKey, FiUser } from "react-icons/fi";
+import React, { useState, useEffect } from "react";
+import { FiKey, FiUser } from "react-icons/fi";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { setLogin } from "@/store/Login";
@@ -13,24 +12,27 @@ import Logo from "./Logo";
 function AuthInput() {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const loginState = useSelector((state: RootState) => state.login.login);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (loginState) {
+      router.push("/home"); // Redirect if already logged in
+    }
+  }, [loginState, router]);
+
   const login = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-  
+    e.preventDefault();
     if (username === "naval.ravikant" && password === "05111974") {
       dispatch(setLogin(true));
       router.push("/home");
-      return; // Stop execution if login is successful
+    } else {
+      setError(true);
     }
-    
-    setError(true);
   };
-
-  
 
   return (
     <form

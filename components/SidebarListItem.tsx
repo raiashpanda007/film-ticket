@@ -1,42 +1,42 @@
-"use client"
-import React, { useEffect, useState } from "react";
-import { useParams,useRouter } from "next/navigation";
-function SidebarListItem({
-  isSelected,
-  children,
-  label,
-}: {
-  isSelected: boolean;
-  children: React.ReactNode;
+"use client";
+import React from "react";
+import { useRouter, usePathname } from "next/navigation";
+
+type SidebarListItemProps = {
   label: string;
-}) {
-    const params = useParams();
-    const router = useRouter();
-    const [selected, setIsSelected] = useState(isSelected);
-    useEffect(() => {
-        if(params.id === label) {
-            setIsSelected(true)
-        } else {
-            if(selected) {
-                setIsSelected(false)
-            }
+  children: React.ReactNode;
+};
 
-        }
+export default function SidebarListItem({ label, children }: SidebarListItemProps) {
+  const router = useRouter();
+  const pathname = usePathname();
 
-    })
+  let isSelected = false;
+  if (label.toLowerCase() === "booking") {
+    isSelected = pathname === "/home" || pathname.startsWith("/movie");
+  } else if (label.toLowerCase() === "activity") {
+    isSelected = pathname === "/activity";
+  }
+
+  const handleClick = () => {
+    if (label.toLowerCase() === "booking") {
+      router.push("/home");
+    } else {
+      router.push(`/${label.toLowerCase()}`);
+    }
+  };
+
   return (
-    <div onClick={() => router.push(`/${label}`)}
+    <div
+      onClick={handleClick}
       className={
         isSelected
-          ? "bg-white text-black w-full h-14 flex items-center justify-center space-x-4  rounded-lg text-2xl font-extrabold cursor-pointer"  
-          : "bg-black text-white w-full h-14 flex items-center justify-center space-x-4  rounded-lg text-2xl font-extrabold cursor-pointer" 
-      } 
+          ? "bg-white text-black w-full h-14 flex items-center justify-center space-x-4 rounded-lg text-2xl font-extrabold cursor-pointer"
+          : "bg-black text-white w-full h-14 flex items-center justify-center space-x-4 rounded-lg text-2xl font-extrabold cursor-pointer"
+      }
     >
       <div>{children}</div>
-        <p>{label}</p>
-      
+      <p>{label}</p>
     </div>
   );
 }
-
-export default SidebarListItem;
